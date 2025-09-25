@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims Analysis Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --color-primary: 63 66 182; /* indigo-700 */
+            --color-secondary: 79 70 229; /* indigo-600 */
+        }
+        .bg-primary { background-color: rgb(var(--color-primary)); }
+        .bg-secondary { background-color: rgb(var(--color-secondary)); }
+        .text-primary { color: rgb(var(--color-primary)); }
+        .border-primary { border-color: rgb(var(--color-primary)); }
+        .ring-primary { --tw-ring-color: rgb(var(--color-primary)); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .animate-slide-in-up { animation: slideInUp 0.5s ease-out forwards; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(var(--color-primary))',
+                        secondary: 'rgb(var(--color-secondary))',
+                    },
+                },
+            },
+        };
+    </script>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://aistudiocdn.com/react@^19.1.1",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+        "react/": "https://aistudiocdn.com/react@^19.1.1/",
+        "recharts": "https://aistudiocdn.com/recharts@^3.2.1",
+        "xlsx": "https://aistudiocdn.com/xlsx@^0.18.5",
+        "papaparse": "https://aistudiocdn.com/papaparse@^5.5.3",
+        "jszip": "https://aistudiocdn.com/jszip@^3.10.1",
+        "file-saver": "https://aistudiocdn.com/file-saver@^2.0.5",
+        "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0"
+      }
+    }
+    </script>
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
