@@ -10,6 +10,22 @@
             --color-primary: 63 66 182; /* indigo-700 */
             --color-secondary: 79 70 229; /* indigo-600 */
         }
+        [data-theme="emerald"] {
+            --color-primary: 6 95 70; /* emerald-800 */
+            --color-secondary: 5 150 105; /* emerald-600 */
+        }
+        [data-theme="crimson"] {
+            --color-primary: 159 18 57; /* rose-800 */
+            --color-secondary: 190 18 60; /* rose-700 */
+        }
+        [data-theme="slate"] {
+            --color-primary: 51 65 85; /* slate-700 */
+            --color-secondary: 71 85 105; /* slate-600 */
+        }
+        [data-theme="amber"] {
+            --color-primary: 180 83 9; /* amber-700 */
+            --color-secondary: 217 119 6; /* amber-600 */
+        }
         .bg-primary { background-color: rgb(var(--color-primary)); }
         .bg-secondary { background-color: rgb(var(--color-secondary)); }
         .text-primary { color: rgb(var(--color-primary)); }
@@ -40,20 +56,23 @@
         };
     </script>
     <script type="importmap">
-    {
-      "imports": {
-        "react": "https://aistudiocdn.com/react@^19.1.1",
-        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-        "react/": "https://aistudiocdn.com/react@^19.1.1/",
-        "recharts": "https://aistudiocdn.com/recharts@^3.2.1",
-        "xlsx": "https://aistudiocdn.com/xlsx@^0.18.5",
-        "papaparse": "https://aistudiocdn.com/papaparse@^5.5.3",
-        "jszip": "https://aistudiocdn.com/jszip@^3.10.1",
-        "file-saver": "https://aistudiocdn.com/file-saver@^2.0.5",
-        "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0"
-      }
-    }
-    </script>
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.1",
+    "xlsx": "https://aistudiocdn.com/xlsx@^0.18.5",
+    "papaparse": "https://aistudiocdn.com/papaparse@^5.5.3",
+    "jszip": "https://aistudiocdn.com/jszip@^3.10.1",
+    "file-saver": "https://aistudiocdn.com/file-saver@^2.0.5",
+    "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0",
+    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.1.1"
+  }
+}
+</script>
 </head>
 <body class="bg-slate-50">
     <div id="root"></div>

@@ -53,6 +53,9 @@ export const processClaimsFile = (rawData: ClaimRecord[]): ProcessedData => {
         
         const claimFileDate = robustDateParse(row['Claim File Date']);
         const closeDate = robustDateParse(row['Close Date']);
+        const claimIntimationDate = robustDateParse(row['Claim Intimation Date']);
+        
+        newRow['parsedClaimIntimationDate'] = claimIntimationDate;
         
         let tat = NaN;
         if(claimFileDate && closeDate){
@@ -169,7 +172,7 @@ export const generatePivots = (df_registered: ClaimRecord[]): { pivotDict: Pivot
     const sumClaimRaw = df_registered.reduce((sum, row) => sum + (safeParseFloat(row['Claim Amount']) || 0), 0);
     const sumSettledRaw = df_registered.reduce((sum, row) => sum + (safeParseFloat(row['Settled Amount']) || 0), 0);
     
-    const tatData = df_registered.map(r => r['TAT (in days)']).filter(t => !isNaN(t));
+    const tatData = df_registered.map(r => r['TAT (in days)']).filter(t => !isNaN(t) && t !== null);
     const avgTatRaw = tatData.length > 0 ? tatData.reduce((a,b) => a+b, 0) / tatData.length : 0;
     
     const kpis: KPIData = {
