@@ -36,14 +36,14 @@ const DashboardV2: React.FC<DashboardV2Props> = ({
         <div className="space-y-8 animate-fade-in">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-800">Analysis Results (V2)</h2>
-                    <p className="text-slate-500 mt-1">
+                    <h2 className="text-3xl font-bold text-foreground">Analysis Results (V2)</h2>
+                    <p className="text-muted-foreground mt-1">
                         Displaying insights for <span className="font-semibold text-primary">{fileName}</span>
                     </p>
                 </div>
                 <button
                     onClick={onReset}
-                    className="flex items-center gap-2 bg-white text-slate-700 font-semibold py-2 px-4 rounded-lg border border-slate-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+                    className="flex items-center gap-2 bg-card text-foreground font-semibold py-2 px-4 rounded-lg border border-border hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
                 >
                     <ResetIcon className="w-5 h-5"/>
                     Start Over
@@ -76,9 +76,9 @@ const DashboardV2: React.FC<DashboardV2Props> = ({
                         <PivotSectionV2 key={title} title={title} data={data} />
                     ))
                 ) : (
-                    <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200 text-center">
-                        <h3 className="text-lg font-semibold text-slate-700">No Pivot Data Available</h3>
-                        <p className="text-slate-500 mt-2">There were no claims found for the selected filters. Try adjusting your filter criteria.</p>
+                    <div className="bg-card p-6 rounded-xl shadow-md border border-border text-center">
+                        <h3 className="text-lg font-semibold text-card-foreground">No Pivot Data Available</h3>
+                        <p className="text-muted-foreground mt-2">There were no claims found for the selected filters. Try adjusting your filter criteria.</p>
                     </div>
                 )}
             </div>

@@ -1,10 +1,12 @@
+
+
 import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ClaimRecord } from '../types';
-// Fix: Changed import for `parseISO` to use submodule import.
-import { format } from 'date-fns';
-import { parseISO } from 'date-fns/parseISO';
+// Fix: Changed date-fns `parseISO` import to use submodule `date-fns/parseISO` to resolve module export error.
+import { format, isValid } from 'date-fns';
+import parseISO from 'date-fns/parseISO';
 
 interface AdvancedAnalysisModalProps {
     isOpen: boolean;
@@ -23,8 +25,8 @@ const COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#8b5cf6'
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-3 rounded-lg shadow-lg border border-slate-200">
-                <p className="font-bold text-slate-800">{label}</p>
+            <div className="bg-card p-3 rounded-lg shadow-lg border border-border">
+                <p className="font-bold text-card-foreground">{label}</p>
                 {payload.map((pld: any, index: number) => (
                     <p key={pld.dataKey} style={{ color: pld.stroke }}>
                         {pld.name}: {Number(pld.value).toLocaleString('en-IN')}
@@ -54,8 +56,8 @@ const TrendChart: React.FC<{
     const yAxisFormatter = metric === 'count' ? (val:number) => val.toLocaleString('en-IN') : formatYAxisTick;
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow border border-slate-200">
-            <h3 className="text-lg font-bold text-slate-800 mb-4">{title}</h3>
+        <div className="bg-card p-4 rounded-lg shadow border border-border">
+            <h3 className="text-lg font-bold text-card-foreground mb-4">{title}</h3>
             <div style={{ width: '100%', height: 400 }}>
                 <ResponsiveContainer>
                     <LineChart data={chartData} margin={{ top: 5, right: 20, left: 30, bottom: 5 }}>
@@ -94,7 +96,7 @@ const AdvancedAnalysisModal: React.FC<AdvancedAnalysisModalProps> = ({ isOpen, o
             
             data.forEach(row => {
                 const date = row.parsedClaimIntimationDate as Date | null;
-                if (date) {
+                if (date && isValid(date)) {
                     const month = format(date, 'yyyy-MM');
                     const catValue = String(row[category] || 'N/A');
                     if (!monthlyData[month]) monthlyData[month] = {};
@@ -149,19 +151,25 @@ const AdvancedAnalysisModal: React.FC<AdvancedAnalysisModalProps> = ({ isOpen, o
 
     return ReactDOM.createPortal(
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
-            <div className="bg-slate-100 rounded-2xl shadow-2xl w-full max-w-7xl h-[95vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
-                <header className="p-4 border-b border-slate-300 flex justify-between items-center">
+            <div className="bg-background rounded-2xl shadow-2xl w-full max-w-7xl h-[95vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+                <header className="p-4 border-b border-border flex justify-between items-center">
                     <h2 className="text-2xl font-bold text-primary">Month-over-Month Trend Analysis</h2>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
-                             <label className="text-sm font-medium text-slate-700">Metric:</label>
-                             <select value={metric} onChange={(e) => setMetric(e.target.value as any)} className="bg-white border-slate-300 rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                             <label className="text-sm font-medium text-muted-foreground">Metric:</label>
+                             <select value={metric} onChange={(e) => setMetric(e.target.value as any)} className="bg-card border-border rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
                                 <option value="count">Claim Count</option>
                                 <option value="claim">Claim Amount</option>
                                 <option value="settled">Settled Amount</option>
                              </select>
                         </div>
-                        <button onClick={onClose} className="text-slate-500 hover:text-slate-800">&times;</button>
+                        <button 
+                            onClick={onClose} 
+                            className="flex items-center justify-center h-8 w-8 rounded-full text-2xl text-muted-foreground hover:bg-muted hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                            aria-label="Close modal"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </header>
                 <main className="flex-grow p-4 overflow-y-auto">

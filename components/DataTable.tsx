@@ -55,7 +55,7 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
     };
     
     if (!data || data.length === 0) {
-        return <p className="text-center text-slate-500 py-4">No data to display.</p>;
+        return <p className="text-center text-muted-foreground py-4">No data to display.</p>;
     }
 
     const headers = Object.keys(data[0]);
@@ -68,15 +68,15 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
     };
 
     const SortIndicator = ({ column }: { column: string }) => {
-        if (sortColumn !== column) return <SortIcon className="w-4 h-4 text-slate-400" />;
+        if (sortColumn !== column) return <SortIcon className="w-4 h-4 text-muted-foreground/50" />;
         if (sortDirection === 'asc') return <SortAscIcon className="w-4 h-4 text-primary" />;
         return <SortDescIcon className="w-4 h-4 text-primary" />;
     };
 
     return (
-        <div className="overflow-x-auto relative shadow-md sm:rounded-lg border border-slate-200 max-h-[400px]">
-            <table className="w-full text-sm text-left text-slate-600">
-                <thead className="text-xs text-slate-700 uppercase bg-slate-100 sticky top-0">
+        <div className="overflow-x-auto relative shadow-md sm:rounded-lg border border-border max-h-[400px]">
+            <table className="w-full text-sm text-left text-foreground">
+                <thead className="text-xs text-muted-foreground uppercase bg-muted sticky top-0">
                     <tr>
                         {headers.map(header => (
                             <th key={header} scope="col" className="py-3 px-6">
@@ -90,7 +90,7 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
                 </thead>
                 <tbody>
                     {sortedData.map((row, rowIndex) => (
-                        <tr key={rowIndex} className={`border-b ${row[headers[0]] === 'TOTAL' ? 'bg-slate-200 font-bold' : 'bg-white hover:bg-slate-50'}`}>
+                        <tr key={rowIndex} className={`border-b border-border ${row[headers[0]] === 'TOTAL' ? 'bg-muted/80 font-bold' : 'bg-card hover:bg-muted'}`}>
                             {headers.map(header => (
                                 <td key={`${rowIndex}-${header}`} className="py-4 px-6">
                                     {formatValue(row[header])}

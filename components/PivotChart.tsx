@@ -55,16 +55,13 @@ const PivotChart: React.FC<PivotChartProps> = ({ data, title, isHorizontal = fal
     const horizontalLayout = (
         <BarChart layout="vertical" data={data} margin={{ top: 5, right: 30, left: 100, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            {/* Fix: Changed yAxisId to xAxisId for XAxis component */}
             <XAxis type="number" xAxisId="left" orientation="bottom" stroke="#4f46e5" tickFormatter={formatAxisTick} tick={{ fontSize: 12 }} />
-            {/* Fix: Changed yAxisId to xAxisId for XAxis component */}
             <XAxis type="number" xAxisId="right" orientation="top" stroke="#10b981" tickFormatter={(val) => val.toLocaleString('en-IN')} tick={{ fontSize: 12 }}>
                  <Label value="Claim Count" offset={0} position="insideTop" dy={-15} />
             </XAxis>
             <YAxis type="category" dataKey={categoryKey} width={120} interval={0} tick={{ fontSize: 12 }} />
             <Tooltip content={<CustomTooltip />} />
             <Legend wrapperStyle={{ bottom: -5 }} />
-            {/* Fix: Changed yAxisId to xAxisId for Bar component */}
             <Bar xAxisId="left" dataKey="Claim_Amount" fill="#4f46e5" name="Claim Amount" />
             <Bar xAxisId="left" dataKey="Settled_Amount" fill="#a5b4fc" name="Settled Amount" />
             <Bar xAxisId="right" dataKey="Rows" fill="#10b981" name="Claim Count" />

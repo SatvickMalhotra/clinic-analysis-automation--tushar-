@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { UploadIcon } from './icons';
 
@@ -48,9 +49,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Upload Your Claims Data</h2>
-            <p className="text-slate-500 mb-6">Drag & drop or select a CSV or Excel file to begin analysis.</p>
+        <div className="max-w-3xl mx-auto bg-card p-8 rounded-2xl shadow-lg border border-border text-center">
+            <h2 className="text-2xl font-bold text-card-foreground mb-2">Upload Your Claims Data</h2>
+            <p className="text-muted-foreground mb-6">Drag & drop or select a CSV file to begin analysis.</p>
 
             <div
                 onDrop={handleDrop}
@@ -58,7 +59,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}
                 className={`relative border-2 border-dashed rounded-lg p-10 transition-colors duration-200 ${
-                    isDragging ? 'border-primary bg-indigo-50' : 'border-slate-300 bg-slate-50'
+                    isDragging ? 'border-primary bg-primary/10' : 'border-border bg-background'
                 }`}
             >
                 <input
@@ -66,23 +67,23 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
                     id="file-upload"
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     onChange={handleFileChange}
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    accept=".csv"
                 />
                 <div className="flex flex-col items-center justify-center space-y-4">
-                    <UploadIcon className="w-12 h-12 text-slate-400" />
-                    <p className="text-slate-600">
+                    <UploadIcon className="w-12 h-12 text-muted-foreground" />
+                    <p className="text-foreground">
                         <label htmlFor="file-upload" className="font-semibold text-primary cursor-pointer hover:underline">
                             Click to upload
                         </label> or drag and drop
                     </p>
-                    <p className="text-xs text-slate-400">CSV or XLSX up to 200MB</p>
+                    <p className="text-xs text-muted-foreground/80">Only CSV files are supported</p>
                 </div>
             </div>
 
             {file && (
-                <div className="mt-6 text-left p-4 bg-slate-100 rounded-lg">
-                    <p className="text-sm font-medium text-slate-800">Selected file:</p>
-                    <p className="text-sm text-slate-600 truncate">{file.name}</p>
+                <div className="mt-6 text-left p-4 bg-muted rounded-lg">
+                    <p className="text-sm font-medium text-card-foreground">Selected file:</p>
+                    <p className="text-sm text-muted-foreground truncate">{file.name}</p>
                 </div>
             )}
 

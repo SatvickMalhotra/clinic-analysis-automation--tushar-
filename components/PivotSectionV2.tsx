@@ -45,7 +45,7 @@ const PivotSectionV2: React.FC<PivotSectionProps> = ({ title, data }) => {
         if (view === 'chart') {
             if (chartContainerRef.current) {
                 try {
-                    const canvas = await html2canvas(chartContainerRef.current, { scale: 2, backgroundColor: '#ffffff' });
+                    const canvas = await html2canvas(chartContainerRef.current, { scale: 2, backgroundColor: 'rgb(var(--color-card-background))' });
                     canvas.toBlob(async (blob) => {
                         if (blob) {
                             await navigator.clipboard.write([
@@ -69,21 +69,21 @@ const PivotSectionV2: React.FC<PivotSectionProps> = ({ title, data }) => {
     };
 
     return (
-        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-slate-200 pivot-section-v2">
+        <div className="bg-card p-4 sm:p-6 rounded-xl shadow-sm border border-border pivot-section-v2">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-                <h3 className="text-xl font-bold text-slate-800">{title}</h3>
+                <h3 className="text-xl font-bold text-card-foreground">{title}</h3>
                 <div className="flex items-center gap-2">
-                    <button onClick={handleDownloadCsv} title="Download as CSV" className="p-2 rounded-md hover:bg-slate-100 text-slate-500 hover:text-primary transition-colors">
+                    <button onClick={handleDownloadCsv} title="Download as CSV" className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-primary transition-colors">
                         <DownloadIcon className="w-5 h-5" />
                     </button>
-                    <button onClick={handleCopyToClipboard} title={view === 'chart' ? "Copy Chart Image" : "Copy Table Data"} className="p-2 rounded-md hover:bg-slate-100 text-slate-500 hover:text-primary transition-colors">
+                    <button onClick={handleCopyToClipboard} title={view === 'chart' ? "Copy Chart Image" : "Copy Table Data"} className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-primary transition-colors">
                         {copied ? <CheckIcon className="w-5 h-5 text-green-500" /> : <CopyIcon className="w-5 h-5" />}
                     </button>
-                    <div className="p-1 bg-slate-100 rounded-lg flex">
-                         <button onClick={() => setView('table')} className={`px-3 py-1 text-sm font-semibold rounded-md ${view === 'table' ? 'bg-white shadow' : 'text-slate-600'}`}>
+                    <div className="p-1 bg-muted rounded-lg flex">
+                         <button onClick={() => setView('table')} className={`px-3 py-1 text-sm font-semibold rounded-md ${view === 'table' ? 'bg-card shadow' : 'text-muted-foreground'}`}>
                             <TableIcon className="w-5 h-5 inline-block sm:mr-2" /> <span className="hidden sm:inline">Table</span>
                          </button>
-                         <button onClick={() => setView('chart')} className={`px-3 py-1 text-sm font-semibold rounded-md ${view === 'chart' ? 'bg-white shadow' : 'text-slate-600'}`}>
+                         <button onClick={() => setView('chart')} className={`px-3 py-1 text-sm font-semibold rounded-md ${view === 'chart' ? 'bg-card shadow' : 'text-muted-foreground'}`}>
                              <ChartIcon className="w-5 h-5 inline-block sm:mr-2" /> <span className="hidden sm:inline">Chart</span>
                          </button>
                     </div>

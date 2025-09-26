@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { V2Filters } from '../App';
 import { FilterIcon, ClearIcon } from './icons';
@@ -38,16 +39,16 @@ const MultiSelectDropdown: React.FC<{
 
     return (
         <div className="relative" ref={ref}>
-            <button onClick={() => setIsOpen(!isOpen)} className="w-full text-left bg-white border border-slate-300 rounded-md shadow-sm px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            <button onClick={() => setIsOpen(!isOpen)} className="w-full text-left bg-card border border-border rounded-md shadow-sm px-4 py-2 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                 <span className="block truncate">{label}</span>
             </button>
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-full bg-white shadow-lg border rounded-md max-h-60 overflow-auto">
+                <div className="absolute z-20 mt-1 w-full bg-card shadow-lg border border-border rounded-md max-h-60 overflow-auto">
                     {options.map(option => (
-                        <label key={option} className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-indigo-50 cursor-pointer">
+                        <label key={option} className="flex items-center px-4 py-2 text-sm text-card-foreground hover:bg-muted cursor-pointer">
                             <input
                                 type="checkbox"
-                                className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+                                className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                                 checked={selected.includes(option)}
                                 onChange={() => handleSelect(option)}
                             />
@@ -74,36 +75,36 @@ const GlobalFilters: React.FC<GlobalFiltersProps> = ({ filters, setFilters, opti
     const resetFilters = () => {
         setFilters({
             dateFrom: '', dateTo: '',
-            Region: [], State: [], 'Filed By': [], Product: [], 'Aging Days Bucketing': []
+            Region: [], State: [], 'Filed By': [], Product: [], Channel: [], 'Aging Days Bucketing': []
         });
     };
     
-    const filterCategories: (keyof V2Filters)[] = ['Region', 'State', 'Filed By', 'Product', 'Aging Days Bucketing'];
+    const filterCategories: (keyof V2Filters)[] = ['Region', 'State', 'Filed By', 'Product', 'Channel', 'Aging Days Bucketing'];
 
     return (
-        <div className="bg-white p-4 rounded-xl shadow-md border border-slate-200 animate-slide-in-up">
+        <div className="bg-card p-4 rounded-xl shadow-md border border-border animate-slide-in-up relative z-10">
             <div className="flex items-center gap-2 mb-4">
                 <FilterIcon className="w-6 h-6 text-primary"/>
-                <h3 className="text-lg font-bold text-slate-800">Global Filters</h3>
+                <h3 className="text-lg font-bold text-card-foreground">Global Filters</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Date Filters */}
                 <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">From Date</label>
-                    <input type="date" value={filters.dateFrom} onChange={e => handleFilterChange('dateFrom', e.target.value)} className="w-full border-slate-300 rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">From Date</label>
+                    <input type="date" value={filters.dateFrom} onChange={e => handleFilterChange('dateFrom', e.target.value)} className="w-full bg-card border-border rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm" />
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">To Date</label>
-                    <input type="date" value={filters.dateTo} onChange={e => handleFilterChange('dateTo', e.target.value)} className="w-full border-slate-300 rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">To Date</label>
+                    <input type="date" value={filters.dateTo} onChange={e => handleFilterChange('dateTo', e.target.value)} className="w-full bg-card border-border rounded-md shadow-sm focus:border-primary focus:ring-primary sm:text-sm" />
                 </div>
                 
-                {/* Spacer */}
+                {/* Spacer for alignment, can be adjusted */}
                 <div className="hidden lg:block col-span-2"></div>
 
                 {/* Multi-select Dropdowns */}
                 {filterCategories.map(cat => (
                      <div key={cat}>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">{cat}</label>
+                        <label className="block text-sm font-medium text-muted-foreground mb-1">{cat}</label>
                         <MultiSelectDropdown 
                            name={cat}
                            options={options[cat] || []}

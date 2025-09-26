@@ -72,9 +72,11 @@ const DownloadButtonsV2: React.FC<DownloadButtonsV2Props> = ({ processedData, pi
                 useCORS: true,
                 logging: false,
                 onclone: (doc) => {
-                  // Ensure background is not transparent for cloned document
                   const body = doc.querySelector('body');
-                  if (body) body.style.background = 'white';
+                  if (body) {
+                    const cardBg = getComputedStyle(chartElement).backgroundColor;
+                    body.style.background = cardBg;
+                  }
                 }
             });
             chartElement.style.width = originalWidth;
@@ -99,7 +101,7 @@ const DownloadButtonsV2: React.FC<DownloadButtonsV2Props> = ({ processedData, pi
          <button
             onClick={onClick}
             disabled={isProcessing || disabled}
-            className="flex items-center justify-center gap-2 bg-white text-primary font-semibold py-2 px-4 rounded-lg border-2 border-primary hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            className="flex items-center justify-center gap-2 bg-card text-primary font-semibold py-2 px-4 rounded-lg border-2 border-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
         >
             {icon}
             {isProcessing ? `Generating...` : label}
@@ -107,12 +109,12 @@ const DownloadButtonsV2: React.FC<DownloadButtonsV2Props> = ({ processedData, pi
     );
 
     return (
-        <div className="bg-white p-4 rounded-xl shadow-md border border-slate-200">
+        <div className="bg-card p-4 rounded-xl shadow-md border border-border">
              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <h3 className="text-md font-bold text-slate-700 mb-3 sm:mb-0">Actions & Reports</h3>
+                <h3 className="text-md font-bold text-card-foreground mb-3 sm:mb-0">Actions & Reports</h3>
                 <Button onClick={onAdvancedAnalysisClick} label="Advanced Analysis" icon={<TrendingUpIcon className="w-5 h-5"/>} disabled={!pivotDict || Object.keys(pivotDict).length === 0} />
              </div>
-             <hr className="my-4"/>
+             <hr className="my-4 border-border"/>
              <div className="flex flex-wrap gap-4">
                 <Button onClick={() => handleDownload('enriched')} label="Enriched Data (XLSX)" icon={<DownloadIcon className="w-5 h-5"/>} isProcessing={isDownloading['enriched']} />
                 <Button onClick={() => handleDownload('pivots')} label="Filtered Pivots (XLSX)" icon={<DownloadIcon className="w-5 h-5"/>} isProcessing={isDownloading['pivots']} disabled={!pivotDict} />
