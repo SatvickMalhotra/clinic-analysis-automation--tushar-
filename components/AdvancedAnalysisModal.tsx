@@ -2,7 +2,9 @@ import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ClaimRecord } from '../types';
-import { format, parseISO } from 'date-fns';
+// Fix: Changed import for `parseISO` to use submodule import.
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/parseISO';
 
 interface AdvancedAnalysisModalProps {
     isOpen: boolean;

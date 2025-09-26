@@ -1,6 +1,8 @@
 import { ClaimRecord, ProcessedData, PivotDict, KPIData, PivotTable } from '../types';
 import { MAP_A, MAP_B, MAP_C, PIVOT_CATEGORIES, STATUS_MAP_REGISTERED } from '../constants';
-import { differenceInDays, parse, isValid } from 'date-fns';
+// Fix: Changed import for `parse` to use submodule import.
+import { differenceInDays, isValid } from 'date-fns';
+import { parse } from 'date-fns/parse';
 
 const safeParseFloat = (value: any): number => {
     if (value === null || value === undefined || String(value).trim() === '') return NaN;
